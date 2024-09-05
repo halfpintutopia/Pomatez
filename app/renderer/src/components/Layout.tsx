@@ -46,6 +46,7 @@ const Layout: React.FC<Props> = ({ history, location, children }) => {
       if (
         timer.timerType === TimerStatus.SHORT_BREAK ||
         timer.timerType === TimerStatus.LONG_BREAK ||
+        timer.timerType === TimerStatus.EXTENDED_BREAK ||
         timer.timerType === TimerStatus.SPECIAL_BREAK
       ) {
         if (location.pathname !== "/") {

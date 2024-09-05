@@ -84,6 +84,9 @@ export const StyledNavLink = styled(NavLink)<NavLinkProps>`
         "var(--color-green)") ||
       (p.type === TimerStatus.LONG_BREAK &&
         p.to === "/" &&
+        "var(--color-green)") ||
+      (p.type === TimerStatus.EXTENDED_BREAK &&
+        p.to === "/" &&
         "var(--color-yellow)") ||
       (p.type === TimerStatus.SPECIAL_BREAK &&
         p.to === "/" &&

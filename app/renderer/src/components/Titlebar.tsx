@@ -20,6 +20,8 @@ import appIconShortBreak from "assets/logos/tray-sb.png";
 import appIconShortBreakDark from "assets/logos/tray-dark-sb.png";
 import appIconLongBreak from "assets/logos/tray-lb.png";
 import appIconLongBreakDark from "assets/logos/tray-dark-lb.png";
+import appIconExtendedBreak from "assets/logos/tray-lb.png";
+import appIconExtendedBreakDark from "assets/logos/tray-dark-lb.png";
 
 type Props = {
   darkMode: boolean;
@@ -38,6 +40,10 @@ const Titlebar: React.FC<Props> = ({ darkMode, timerType }) => {
         return darkMode ? appIconShortBreakDark : appIconShortBreak;
       case TimerStatus.LONG_BREAK:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;
+      case TimerStatus.EXTENDED_BREAK:
+        return darkMode
+          ? appIconExtendedBreakDark
+          : appIconExtendedBreak;
       default:
         return darkMode ? appIconLongBreakDark : appIconLongBreak;
     }

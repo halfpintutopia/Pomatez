@@ -33,6 +33,8 @@ export function Hero() {
     shortBreakPreviewDark,
     longBreakPreviewLight,
     longBreakPreviewDark,
+    extendedBreakPreviewLight,
+    extendedBreakPreviewDark,
     configPreviewLight,
     configPreviewDark,
     settingsPreviewLight,
@@ -256,6 +258,17 @@ export function Hero() {
                   : longBreakPreviewLight.childImageSharp.fluid
               }
               alt="long break preview"
+            />
+          </StyledPreviewImage>
+
+          <StyledPreviewImage>
+            <Image
+              fluid={
+                isDarkMode
+                  ? extendedBreakPreviewDark.childImageSharp.fluid
+                  : extendedBreakPreviewLight.childImageSharp.fluid
+              }
+              alt="extended break preview"
             />
           </StyledPreviewImage>
         </StyledPreviewWrapper>

@@ -5,6 +5,7 @@ import {
   setSessionRounds,
   setShorBreak,
   setLongBreak,
+  setExtendedBreak,
 } from "store";
 import { StyledConfigSliderSection } from "styles";
 import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
@@ -12,13 +13,19 @@ import ConfigSlider, { ConfigSliderProps } from "./ConfigSlider";
 const SliderSection: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const { stayFocus, shortBreak, longBreak, sessionRounds } =
-    useAppSelector(({ config }) => ({
-      stayFocus: config.stayFocus,
-      shortBreak: config.shortBreak,
-      longBreak: config.longBreak,
-      sessionRounds: config.sessionRounds,
-    }));
+  const {
+    stayFocus,
+    shortBreak,
+    longBreak,
+    extendedBreak,
+    sessionRounds,
+  } = useAppSelector(({ config }) => ({
+    stayFocus: config.stayFocus,
+    shortBreak: config.shortBreak,
+    longBreak: config.longBreak,
+    extendedBreak: config.extendedBreak,
+    sessionRounds: config.sessionRounds,
+  }));
 
   const sliderRangeList: ConfigSliderProps[] = [
     {
@@ -51,6 +58,17 @@ const SliderSection: React.FC = () => {
       value: longBreak,
       handleConfigChange: useCallback(
         (value) => dispatch(setLongBreak(parseInt(value))),
+        [dispatch]
+      ),
+    },
+    {
+      label: "Extended break",
+      valueType: "mins",
+      minValue: 1,
+      maxValue: 120,
+      value: extendedBreak,
+      handleConfigChange: useCallback(
+        (value) => dispatch(setExtendedBreak(parseInt(value))),
         [dispatch]
       ),
     },

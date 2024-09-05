@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getFromStorage } from "utils";
 import { SettingTypes, SettingsPayload } from "./types";
 import { defaultSettings } from "./defaultSettings";
+import { setExtendedBreak } from "store/config";
 
 export type { SettingTypes };
 
@@ -108,6 +109,10 @@ const settingsSlice = createSlice({
     restoreDefaultSettings() {
       return defaultSettings;
     },
+
+    setExtendedMode(state, action: SettingsPayload<"extendedMode">) {
+      state.extendedMode = action.payload;
+    },
   },
 });
 
@@ -128,6 +133,7 @@ export const {
   setOpenAtLogin,
   setUseNativeTitlebar,
   toggleNotificationSound,
+  setExtendedMode,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

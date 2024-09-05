@@ -23,6 +23,8 @@ export function RoadMap() {
     shortBreakPreviewDark,
     longBreakPreviewLight,
     longBreakPreviewDark,
+    extendedBreakPreviewLight,
+    extendedBreakPreviewDark,
   } = useRoadMapQuery();
 
   const { isDarkMode } = useContext(ThemeContext);
@@ -65,6 +67,16 @@ export function RoadMap() {
                       : longBreakPreviewLight.childImageSharp.fluid
                   }
                   alt="long break preview"
+                />
+              </StyledRoadmapImage>
+              <StyledRoadmapImage>
+                <Image
+                  fluid={
+                    isDarkMode
+                      ? extendedBreakPreviewDark.childImageSharp.fluid
+                      : extendedBreakPreviewLight.childImageSharp.fluid
+                  }
+                  alt="extended break preview"
                 />
               </StyledRoadmapImage>
             </StyledRoadmapImageWrapper>

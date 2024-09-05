@@ -6,6 +6,7 @@ import {
   SET_ALWAYS_ON_TOP,
   CLOSE_WINDOW,
   SET_COMPACT_MODE,
+  SET_EXTENDED_MODE,
   SET_FULLSCREEN_BREAK,
   MINIMIZE_WINDOW,
   SET_NATIVE_TITLEBAR,
@@ -84,6 +85,12 @@ export const ElectronConnectorProvider: React.FC = ({ children }) => {
       compactMode: settings.compactMode,
     });
   }, [electron, settings.compactMode]);
+
+  useEffect(() => {
+    electron.send(SET_EXTENDED_MODE, {
+      extendedMode: settings.extendedMode,
+    });
+  }, [electron, settings.extendedMode]);
 
   useEffect(() => {
     electron.send(SET_UI_THEME, {

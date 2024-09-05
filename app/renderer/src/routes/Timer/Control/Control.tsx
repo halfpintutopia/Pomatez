@@ -92,11 +92,23 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
 
     switch (timer.timerType) {
       case TimerStatus.STAY_FOCUS:
-        if (timer.round < config.sessionRounds) {
-          dispatch(skipTimer(TimerStatus.SHORT_BREAK));
+        // TODO add the extended break option
+        if (settings.extendedMode) {
+          if (timer.round === 1) {
+            dispatch(skipTimer(TimerStatus.SHORT_BREAK));
+          } else if (timer.round === 2) {
+            dispatch(skipTimer(TimerStatus.LONG_BREAK));
+          } else {
+            dispatch(skipTimer(TimerStatus.EXTENDED_BREAK));
+          }
         } else {
-          dispatch(skipTimer(TimerStatus.LONG_BREAK));
+          if (timer.round < config.sessionRounds) {
+            dispatch(skipTimer(TimerStatus.SHORT_BREAK));
+          } else {
+            dispatch(skipTimer(TimerStatus.LONG_BREAK));
+          }
         }
+
         if (!timer.playing) dispatch(setPlay(!timer.playing));
         break;
 
@@ -107,6 +119,12 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
         break;
 
       case TimerStatus.LONG_BREAK:
+        dispatch(skipTimer(TimerStatus.STAY_FOCUS));
+        dispatch(setRound(settings.extendedMode ? timer.round + 1 : 1));
+        if (!timer.playing) dispatch(setPlay(!timer.playing));
+        break;
+
+      case TimerStatus.EXTENDED_BREAK:
         dispatch(skipTimer(TimerStatus.STAY_FOCUS));
         dispatch(setRound(1));
         if (!timer.playing) dispatch(setPlay(!timer.playing));
@@ -123,6 +141,7 @@ const Control: React.FC<Props> = ({ resetTimerAction }) => {
     timer.playing,
     timer.timerType,
     settings.enableStrictMode,
+    settings.extendedMode,
     config.sessionRounds,
     activateWarning,
   ]);

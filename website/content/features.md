@@ -57,6 +57,9 @@ features:
 
   - heading: Compact mode
     description: Once enabled, the app will occupy less space on your screen and it will be useful if you're using a small-screen device.
+
+  - heading: Extended mode
+    description: Once enabled, the app will be set to 3 sessions, with short, long and extended breaks.
 ---
 
 All features of Pomodoro Technique are supported plus some additional features that you might find useful.

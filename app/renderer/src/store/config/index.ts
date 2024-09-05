@@ -25,6 +25,10 @@ const configSlice = createSlice({
       state.longBreak = action.payload;
     },
 
+    setExtendedBreak(state, action: ConfigPayload<"extendedBreak">) {
+      state.extendedBreak = action.payload;
+    },
+
     setSessionRounds(state, action: ConfigPayload<"sessionRounds">) {
       state.sessionRounds = action.payload;
     },
@@ -67,6 +71,7 @@ export const {
   restoreDefaultConfig,
   setFourthSpecialBreak,
   setLongBreak,
+  setExtendedBreak,
   setSecondSpecialBreak,
   setSessionRounds,
   setShorBreak,

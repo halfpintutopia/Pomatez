@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "hooks/storeHooks";
 import {
   setAlwaysOnTop,
   setEnableStrictMode,
+  setExtendedMode,
   setEnableProgressAnimation,
   setNotificationType,
   setEnableFullscreenBreak,
@@ -62,6 +63,14 @@ const FeatureSection: React.FC = () => {
       onChange: useCallback(() => {
         dispatch(setEnableStrictMode(!settings.enableStrictMode));
       }, [dispatch, settings.enableStrictMode]),
+    },
+    {
+      id: "extended-mode",
+      label: "Extended Mode",
+      checked: settings.extendedMode,
+      onChange: useCallback(() => {
+        dispatch(setExtendedMode(!settings.extendedMode));
+      }, [dispatch, settings.extendedMode]),
     },
     {
       id: "dark-theme",

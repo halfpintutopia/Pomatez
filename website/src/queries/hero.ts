@@ -8,6 +8,8 @@ export type HeroQueryProps = {
   shortBreakPreviewDark: FluidImageProps;
   longBreakPreviewLight: FluidImageProps;
   longBreakPreviewDark: FluidImageProps;
+  extendedBreakPreviewLight: FluidImageProps;
+  extendedBreakPreviewDark: FluidImageProps;
   configPreviewLight: FluidImageProps;
   configPreviewDark: FluidImageProps;
   settingsPreviewLight: FluidImageProps;
@@ -84,6 +86,26 @@ export const useLandingQuery = () =>
         }
       }
       longBreakPreviewDark: file(
+        relativePath: { eq: "long-break-dark.PNG" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 200, quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
+      extendedBreakPreviewLight: file(
+        relativePath: { eq: "long-break-light.PNG" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 200, quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
+      extendedBreakPreviewDark: file(
         relativePath: { eq: "long-break-dark.PNG" }
       ) {
         childImageSharp {

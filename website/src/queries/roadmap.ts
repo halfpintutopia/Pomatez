@@ -61,5 +61,25 @@ export const useRoadMapQuery = () =>
           }
         }
       }
+      extendedBreakPreviewLight: file(
+        relativePath: { eq: "long-break-light.PNG" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 340, quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
+      extendedBreakPreviewDark: file(
+        relativePath: { eq: "long-break-dark.PNG" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 340, quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
     }
   `);

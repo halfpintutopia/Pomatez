@@ -12,6 +12,9 @@ const CounterType: React.FC<Props> = ({ timerType }) => {
     <StyledCounterType>
       {(timerType === TimerStatus.SHORT_BREAK && <SVG name="mug" />) ||
         (timerType === TimerStatus.LONG_BREAK && <SVG name="nap" />) ||
+        (timerType === TimerStatus.EXTENDED_BREAK && (
+          <SVG name="nap" />
+        )) ||
         (timerType === TimerStatus.SPECIAL_BREAK && (
           <SVG name="fast-food" />
         )) || <SVG name="laptop" />}

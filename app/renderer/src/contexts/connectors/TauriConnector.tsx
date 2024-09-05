@@ -7,6 +7,7 @@ import {
   SET_ALWAYS_ON_TOP,
   CLOSE_WINDOW,
   SET_COMPACT_MODE,
+  SET_EXTENDED_MODE,
   SET_FULLSCREEN_BREAK,
   MINIMIZE_WINDOW,
   SET_NATIVE_TITLEBAR,
@@ -157,6 +158,12 @@ export const TauriConnectorProvider: React.FC = ({ children }) => {
       compactMode: settings.compactMode,
     });
   }, [send, settings.compactMode]);
+
+  useEffect(() => {
+    send(SET_EXTENDED_MODE, {
+      extendedMode: settings.extendedMode,
+    });
+  }, [send, settings.extendedMode]);
 
   useEffect(() => {
     send(SET_UI_THEME, {

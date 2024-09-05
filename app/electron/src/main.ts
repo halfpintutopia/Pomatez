@@ -78,11 +78,13 @@ let win: BrowserWindow | null;
 
 type WindowStateProps = {
   isOnCompactMode: boolean;
+  isExtendedMode: boolean;
 } & FullscreenState;
 
 const windowState: WindowStateProps = {
   isFullscreen: false,
   isOnCompactMode: false,
+  isExtendedMode: false,
 };
 
 function createMainWindow() {

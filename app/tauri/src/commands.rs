@@ -237,6 +237,7 @@ impl PomatezCommands for Builder<Wry> {
             set_always_on_top,
             set_fullscreen_break,
             set_compact_mode,
+            set_extended_mode,
             set_ui_theme,
             set_native_titlebar,
             system_tray::tray_icon_update,

@@ -11,6 +11,8 @@ const CounterLabel: React.FC<Props> = ({ timerType }) => {
     <StyledCounterLabel>
       {(timerType === TimerStatus.SHORT_BREAK && "Short Break") ||
         (timerType === TimerStatus.LONG_BREAK && "Long Break") ||
+        (timerType === TimerStatus.EXTENDED_BREAK &&
+          "Extended Break") ||
         (timerType === TimerStatus.SHORT_BREAK && "Special Break") ||
         "Stay Focused"}
     </StyledCounterLabel>

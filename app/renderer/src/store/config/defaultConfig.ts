@@ -4,6 +4,7 @@ export const defaultConfig: Readonly<ConfigTypes> = Object.freeze({
   stayFocus: 25,
   shortBreak: 5,
   longBreak: 15,
+  extendedBreak: 45,
   sessionRounds: 4,
   specialBreaks: {
     firstBreak: {

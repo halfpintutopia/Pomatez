@@ -49,7 +49,8 @@ export const StyledControl = styled.div<ControlProps>`
 
   color: ${(p) =>
     (p.type === TimerStatus.SHORT_BREAK && "var(--color-green)") ||
-    (p.type === TimerStatus.LONG_BREAK && "var(--color-yellow)") ||
+    (p.type === TimerStatus.LONG_BREAK && "var(--color-green)") ||
+    (p.type === TimerStatus.EXTENDED_BREAK && "var(--color-yellow)") ||
     (p.type === TimerStatus.SPECIAL_BREAK && "var(--color-yellow)") ||
     "var(--color-primary)"};
 
@@ -58,6 +59,8 @@ export const StyledControl = styled.div<ControlProps>`
       (p.type === TimerStatus.SHORT_BREAK &&
         "var(--color-bg-ripple-green)") ||
       (p.type === TimerStatus.LONG_BREAK &&
+        "var(--color-bg-ripple-green)") ||
+      (p.type === TimerStatus.EXTENDED_BREAK &&
         "var(--color-bg-ripple-yellow)") ||
       (p.type === TimerStatus.SPECIAL_BREAK &&
         "var(--color-bg-ripple-yellow)") ||
@@ -101,6 +104,8 @@ export const StyledSessionReset = styled.button<SessionProps>`
       (p.timerType === TimerStatus.SHORT_BREAK &&
         "var(--color-green)") ||
       (p.timerType === TimerStatus.LONG_BREAK &&
+        "var(--color-green)") ||
+      (p.timerType === TimerStatus.EXTENDED_BREAK &&
         "var(--color-yellow)") ||
       (p.timerType === TimerStatus.SPECIAL_BREAK &&
         "var(--color-yellow)") ||

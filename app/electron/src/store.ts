@@ -9,6 +9,7 @@ type StoreProps = {
   useNativeTitlebar?: boolean;
   compactMode?: boolean;
   openAtLogin?: boolean;
+  extendedMode?: boolean;
 };
 
 /**
@@ -58,6 +59,7 @@ const store = new SafeStore<StoreProps>({
     useNativeTitlebar: !isWindow(),
     compactMode: false,
     openAtLogin: false,
+    extendedMode: false,
   },
 });
 

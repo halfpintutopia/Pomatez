@@ -82,11 +82,15 @@ const CounterProvider: React.FC = ({ children }) => {
       case TimerStatus.LONG_BREAK:
         setTimerDuration(config.longBreak);
         break;
+      case TimerStatus.EXTENDED_BREAK:
+        setTimerDuration(config.extendedBreak);
+        break;
       case TimerStatus.SPECIAL_BREAK:
         setTimerDuration(duration / 60);
         break;
     }
   }, [
+    config.extendedBreak,
     config.longBreak,
     config.stayFocus,
     config.shortBreak,
@@ -216,6 +220,9 @@ const CounterProvider: React.FC = ({ children }) => {
       case TimerStatus.LONG_BREAK:
         setTimerDuration(config.longBreak);
         break;
+      case TimerStatus.EXTENDED_BREAK:
+        setTimerDuration(config.extendedBreak);
+        break;
     }
   }, [
     setTimerDuration,
@@ -223,6 +230,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config.stayFocus,
     config.shortBreak,
     config.longBreak,
+    config.extendedBreak,
   ]);
 
   useEffect(() => {
@@ -262,6 +270,12 @@ const CounterProvider: React.FC = ({ children }) => {
             { body: "Prepare yourself to stay focused again." },
             settings.enableVoiceAssistance && sixtySecondsLeftWav
           );
+        } else if (timer.timerType === TimerStatus.EXTENDED_BREAK) {
+          notification(
+            "60 seconds left.",
+            { body: "Prepare yourself to stay focused again." },
+            settings.enableVoiceAssistance && sixtySecondsLeftWav
+          );
         } else if (timer.timerType === TimerStatus.SPECIAL_BREAK) {
           notification(
             "60 seconds left.",
@@ -289,28 +303,65 @@ const CounterProvider: React.FC = ({ children }) => {
       switch (timer.timerType) {
         case TimerStatus.STAY_FOCUS:
           if (timer.round < config.sessionRounds) {
-            setTimeout(() => {
-              notification(
-                "Focus time finished.",
-                {
-                  body: `Enjoy your ${config.shortBreak} ${
-                    isEqualToOne(config.shortBreak)
-                      ? "minute"
-                      : "minutes"
-                  } short break.`,
-                },
-                settings.enableVoiceAssistance && focusFinishedWav
-              );
+            if (config.sessionRounds === 3 && timer.round === 0) {
+              setTimeout(() => {
+                notification(
+                  "Focus time finished.",
+                  {
+                    body: `Enjoy your ${config.shortBreak} ${
+                      isEqualToOne(config.shortBreak)
+                        ? "minute"
+                        : "minutes"
+                    } short break.`,
+                  },
+                  settings.enableVoiceAssistance && focusFinishedWav
+                );
 
-              dispatch(setTimerType(TimerStatus.SHORT_BREAK));
-            }, 1000);
+                dispatch(setTimerType(TimerStatus.SHORT_BREAK));
+              }, 1000);
+            } else if (
+              config.sessionRounds === 3 &&
+              timer.round === 1
+            ) {
+              setTimeout(() => {
+                notification(
+                  "Focus time finished.",
+                  {
+                    body: `Enjoy your ${config.longBreak} ${
+                      isEqualToOne(config.longBreak)
+                        ? "minute"
+                        : "minutes"
+                    } long break.`,
+                  },
+                  settings.enableVoiceAssistance && focusFinishedWav
+                );
+
+                dispatch(setTimerType(TimerStatus.LONG_BREAK));
+              }, 1000);
+            } else {
+              setTimeout(() => {
+                notification(
+                  "Focus time finished.",
+                  {
+                    body: `Enjoy your ${config.shortBreak} ${
+                      isEqualToOne(config.shortBreak)
+                        ? "minute"
+                        : "minutes"
+                    } short break.`,
+                  },
+                  settings.enableVoiceAssistance && focusFinishedWav
+                );
+
+                dispatch(setTimerType(TimerStatus.SHORT_BREAK));
+              }, 1000);
+            }
           } else {
             setTimeout(() => {
               notification(
                 "Session rounds completed.",
                 {
-                  body: `Enjoy your ${config.longBreak} ${
-                    isEqualToOne(config.longBreak)
+                  body: `Enjoy your ${config.extendedBreak} ${
+                    isEqualToOne(config.extendedBreak)
                       ? "minute"
                       : "minutes"
                   } long break.`,
@@ -318,7 +369,7 @@ const CounterProvider: React.FC = ({ children }) => {
                 settings.enableVoiceAssistance && sessionCompletedWav
               );
 
-              dispatch(setTimerType(TimerStatus.LONG_BREAK));
+              dispatch(setTimerType(TimerStatus.EXTENDED_BREAK));
             }, 1000);
           }
           break;
@@ -347,6 +398,29 @@ const CounterProvider: React.FC = ({ children }) => {
           break;
 
         case TimerStatus.LONG_BREAK:
+          setTimeout(() => {
+            notification(
+              "Break time finished.",
+              {
+                body: `Stay focused as much as possible for ${
+                  config.stayFocus
+                } ${
+                  isEqualToOne(config.stayFocus) ? "minute" : "minutes"
+                }.`,
+              },
+              settings.enableVoiceAssistance && breakFinishedWav
+            );
+
+            dispatch(setTimerType(TimerStatus.STAY_FOCUS));
+            dispatch(setRound(1));
+
+            if (!settings.autoStartWorkTime) {
+              dispatch(setPlay(false));
+            }
+          }, 1000);
+          break;
+
+        case TimerStatus.EXTENDED_BREAK:
           setTimeout(() => {
             notification(
               "Break time finished.",
@@ -402,6 +476,7 @@ const CounterProvider: React.FC = ({ children }) => {
     config.stayFocus,
     config.shortBreak,
     config.longBreak,
+    config.extendedBreak,
     config.sessionRounds,
     settings.notificationType,
     settings.autoStartWorkTime,
